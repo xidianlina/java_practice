@@ -1,4 +1,4 @@
-package com.practice.constructor;
+package com.practice.reflect.constructor;
 
 public class Student {
     //---------------构造方法-------------------

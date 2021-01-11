@@ -1,4 +1,4 @@
-package com.practice.constructor;
+package com.practice.reflect.constructor;
 
 import java.lang.reflect.Constructor;
 
@@ -20,7 +20,7 @@ import java.lang.reflect.Constructor;
 public class Constructors {
     public static void main(String[] args) throws Exception {
         //1.加载Class对象
-        Class clazz = Class.forName("com.practice.constructor.Student");
+        Class clazz = Class.forName("com.practice.reflect.constructor.Student");
 
         //2.获取所有公有构造方法
         System.out.println("\n**********************所有公有构造方法*********************************");
