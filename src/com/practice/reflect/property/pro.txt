@@ -1,0 +1,2 @@
+className = com.practice.reflect.property.Student
+methodName = show
