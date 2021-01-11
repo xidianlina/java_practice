@@ -22,8 +22,16 @@ Java 反射
 *  没有公共的构造方法，方法共有64个。
   ![class3](http://github.com/xidianlina/java_practice/raw/master/picture/class3.jpg)
   
+三、反射的使用（这里使用Student类做演示）
+------
+
+# 1、获取Class对象的三种方式
+## 1.1 Object ——> getClass();
+## 1.2 任何数据类型（包括基本数据类型）都有一个“静态”的class属性
+## 1.3 通过Class类的静态方法：forName（String  className）(常用)
+> 其中1.1是因为Object类中的getClass方法、因为所有类都继承Object类。从而调用Object类来获取
   
-   
+![class4](http://github.com/xidianlina/java_practice/raw/master/picture/class4.jpg)
    
 ### 参考:
 ```
