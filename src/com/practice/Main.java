@@ -1,5 +1,7 @@
 package com.practice;
 
+import com.practice.constructor.Student;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -18,7 +20,7 @@ public class Main {
         //第三种方式获取Class对象
         try {
             //注意此字符串必须是真实路径，就是带包名的类路径，包名.类名
-            Class stuClass3 = Class.forName("com.practice.Student");
+            Class stuClass3 = Class.forName("com.practice.constructor.Student");
             //判断三种方式是否获取的是同一个Class对象
             System.out.println(stuClass3 == stuClass2);
         } catch (ClassNotFoundException e) {

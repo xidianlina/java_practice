@@ -1,4 +1,4 @@
-package com.practice;
+package com.practice.constructor;
 
 public class Student {
     //---------------构造方法-------------------
@@ -31,5 +31,4 @@ public class Student {
     private Student(int age) {
         System.out.println("私有的构造方法   年龄：" + age);
     }
-
 }

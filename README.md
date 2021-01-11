@@ -36,6 +36,8 @@ Java 反射
 ```Java
 package com.practice;
 
+import com.practice.constructor.Student;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -54,7 +56,7 @@ public class Main {
         //第三种方式获取Class对象
         try {
             //注意此字符串必须是真实路径，就是带包名的类路径，包名.类名
-            Class stuClass3 = Class.forName("com.practice.Student");
+            Class stuClass3 = Class.forName("com.practice.constructor.Student");
             //判断三种方式是否获取的是同一个Class对象
             System.out.println(stuClass3 == stuClass2);
         } catch (ClassNotFoundException e) {
@@ -63,12 +65,108 @@ public class Main {
 
     }
 }
+```
+* 注意：在运行期间，一个类，只有一个Class对象产生。
+* 三种方式常用第三种，第一种对象都有了还要反射干什么。第二种需要导入类的包，依赖太强，不导包就抛编译错误。一般都第三种，一个字符串可以传入也可写在配置文件中等多种方法。
+```Java
+package com.practice.constructor;
 
+public class Student {
+    //---------------构造方法-------------------
+    //（默认的构造方法）
+    Student(String str) {
+        System.out.println("(默认)的构造方法 s = " + str);
+    }
 
+    //无参构造方法
+    public Student() {
+        System.out.println("调用了公有、无参构造方法执行了。。。");
+    }
+
+    //有一个参数的构造方法
+    public Student(char name) {
+        System.out.println("姓名：" + name);
+    }
+
+    //有多个参数的构造方法
+    public Student(String name, int age) {
+        System.out.println("姓名：" + name + "年龄：" + age);//这的执行效率有问题，以后解决。
+    }
+
+    //受保护的构造方法
+    protected Student(boolean n) {
+        System.out.println("受保护的构造方法 n = " + n);
+    }
+
+    //私有构造方法
+    private Student(int age) {
+        System.out.println("私有的构造方法   年龄：" + age);
+    }
+}
 ```
 
+```Java
+package com.practice.constructor;
 
+import java.lang.reflect.Constructor;
 
+/*
+ * 通过Class对象可以获取某个类中的：构造方法、成员变量、成员方法；并访问成员；
+ *
+ * 1.获取构造方法：
+ * 		1).批量的方法：
+ * 			public Constructor[] getConstructors()：所有"公有的"构造方法
+            public Constructor[] getDeclaredConstructors()：获取所有的构造方法(包括私有、受保护、默认、公有)
+
+ * 		2).获取单个的方法，并调用：
+ * 			public Constructor getConstructor(Class... parameterTypes):获取单个的"公有的"构造方法：
+ * 			public Constructor getDeclaredConstructor(Class... parameterTypes):获取"某个构造方法"可以是私有的，或受保护、默认、公有；
+ *
+ * 			调用构造方法：
+ * 			Constructor-->newInstance(Object... initargs)
+ */
+public class Constructors {
+    public static void main(String[] args) throws Exception {
+        //1.加载Class对象
+        Class clazz = Class.forName("com.practice.constructor.Student");
+
+        //2.获取所有公有构造方法
+        System.out.println("\n**********************所有公有构造方法*********************************");
+        Constructor[] conArray = clazz.getConstructors();
+        for (Constructor c : conArray) {
+            System.out.println(c);
+        }
+
+        System.out.println("\n************所有的构造方法(包括：私有、受保护、默认、公有)***************");
+        conArray = clazz.getDeclaredConstructors();
+        for (Constructor c : conArray) {
+            System.out.println(c);
+        }
+
+        System.out.println("\n*****************获取公有、无参的构造方法*******************************");
+        //1>、因为是无参的构造方法所以类型是一个null,不写也可以：这里需要的是一个参数的类型，切记是类型
+        //2>、返回的是描述这个无参构造函数的类对象。
+        Constructor con = clazz.getConstructor(null);
+        System.out.println("con = " + con);
+
+        //调用构造方法
+        //newInstance是 Constructor类的方法（管理构造函数的类）
+        //newInstance(Object... initargs)使用此 Constructor 对象表示的构造方法来创建该构造方法的声明类的新实例，并用指定的初始化参数初始化该实例。
+        //它的返回值是T类型，所以newInstance是创建了一个构造方法的声明类的新实例对象。并为之调用
+        Object obj = con.newInstance();
+        System.out.println("obj = " + obj);
+        Student stu = (Student) obj;
+
+        System.out.println("\n******************获取私有构造方法，并调用*******************************");
+        con = clazz.getDeclaredConstructor(char.class);
+        System.out.println("con2 = " + con);
+        //调用构造方法
+        con.setAccessible(true);//暴力访问(忽略掉访问修饰符)
+        obj = con.newInstance('男');
+        System.out.println("obj = " + obj);
+    }
+}
+```
 
 
 
