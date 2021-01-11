@@ -12,3 +12,8 @@ Java 反射
    ![class](http://github.com/xidianlina/java_practice/raw/master/picture/class.jpg)
    如图是类的正常加载过程：反射的原理在与class对象。
    Class对象的由来是将class文件读入内存，并为之创建一个Class对象。
+   
+   
+######参考:
+https://www.cnblogs.com/shiy/p/6526868.html
+https://blog.csdn.net/lililuni/article/details/83449088
