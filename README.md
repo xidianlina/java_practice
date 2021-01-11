@@ -12,6 +12,17 @@ Java 反射
    ![class](http://github.com/xidianlina/java_practice/raw/master/picture/class.jpg)
    如图是类的正常加载过程：反射的原理在与class对象。
    Class对象的由来是将class文件读入内存，并为之创建一个Class对象。
+  
+二、查看Class类在java中的api详解（1.7的API） 
+------
+ ![class2](http://github.com/xidianlina/java_practice/raw/master/picture/class2.jpg)
+  
+*  Class类的实例表示正在运行的 Java 应用程序中的类和接口。也就是jvm中有N多的实例每个类都有该Class对象。（包括基本数据类型）
+*  Class没有公共构造方法。Class 对象是在加载类时由 Java 虚拟机以及通过调用类加载器中的defineClass 方法自动构造的。也就是这不需要我们自己去处理创建，JVM已经帮我们创建好了。
+*  没有公共的构造方法，方法共有64个。
+  
+  
+  
    
    
 ### 参考:
